@@ -1,5 +1,6 @@
-const generateMainHTML = (teamCards) =>
-    `<!DOCTYPE html>
+const generateMainHTML = function (teamCards) {
+    return `
+    <!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -30,59 +31,69 @@ const generateMainHTML = (teamCards) =>
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
         
-        </html>`
+        </html>
+        `
+}
 
-const generateMangagerCard = (manager) =>
-    `<div class="col">
+const generateMangagerCard = function (manager) {
+    return `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">${manager.managerName}
+                                <h5 class="card-title">${manager.name}
                                 </h5>
                                 <p class="card-text">Manager</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${manager.managerID}</li>
-                                <li class="list-group-item">Email:<a href="mailto:${manager.managerEmail}"
-                                        target="_blank">${manager.managerEmail}</a></li>
+                                <li class="list-group-item">ID: ${manager.id}</li>
+                                <li class="list-group-item">Email:<a href="mailto:${manager.email}"
+                                        target="_blank">${manager.email}</a></li>
                                 </li>
-                                <li class="list-group-item">Office number: ${manager.managerOffice}</li>
+                                <li class="list-group-item">Office number: ${manager.officeNumber}</li>
                             </ul>
                         </div>
-                    </div>`
-
-const generateEngineerCard = (engineer) =>
-    `<div class="col">
+                    </div>
+                    `
+}
+const generateEngineerCard = function (engineer) {
+    return `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">${engineer.engineerName}</h5>
+                                <h5 class="card-title">${engineer.name}</h5>
                                 <p class="card-text">Engineer</p>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">ID: ${engineer.engineerID}</li>
-                                <li class="list-group-item">Email: <a href="mailto:${engineer.engineerEmail}"
-                                        target="_blank">${engineer.engineerEmail}</a></li>
+                                <li class="list-group-item">Email: <a href="mailto:${engineer.email}"
+                                        target="_blank">${engineer.email}</a></li>
                                 </li>
-                                <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.engineerGit}"
-                                        target="_blank">${engineer.engineerGit}</a></li>
+                                <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.gitHub}"
+                                        target="_blank">${engineer.gitHub}</a></li>
                             </ul>
                         </div>
-                    </div>`
-const generateInternCard = (intern) =>
-    `<div class="col">
+                    </div>
+                    `
+}
+
+const generateInternCard = function (intern) {
+    return `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">${intern.internName}</h5>
+                                <h5 class="card-title">${intern.name}</h5>
                                 <p class="card-text">Intern</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${intern.internID}</li>
-                                <li class="list-group-item">Email: <a href="mailto:${intern.internEmail}"
-                                        target="_blank">${intern.internEmail}</a></li>
-                                <li class="list-group-item">School: ${intern.internSchool}</li>
+                                <li class="list-group-item">ID: ${intern.id}</li>
+                                <li class="list-group-item">Email: <a href="mailto:${intern.email}"
+                                        target="_blank">${intern.email}</a></li>
+                                <li class="list-group-item">School: ${intern.school}</li>
                             </ul>
                         </div>
-                    </div>`
-
+                    </div>
+                    `
+}
 generateFullHTML = (inputs) => {
     domArr = [];
 

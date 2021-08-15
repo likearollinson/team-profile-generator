@@ -1,169 +1,218 @@
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const htmlGenerator = require('./src/htmlGenerator');
+
+
 //allows necessary modules to be imported
 const inquirer = require('inquirer');
 const fs = require('fs');
-const util = require('util');
 
-// create writeFile function using promises instead of a callback function
-const writeFileAsync = util.promisify(fs.writeFile);
-const appendFileAsync = util.promisify(fs.appendFile);
+const teamArr = [];
 
-const promptUser = () => {
+const managerPrompt = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'managerName',
+            name: 'name',
             message: "What is the manager's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.error('Please enter a manager name!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'managerID',
+            name: 'id',
             message: "What is the manager's ID?",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.error('Please enter a valid ID!');
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'managerEmail',
+            name: 'email',
             message: "What is the manager's email?",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                    return true;
+                } else {
+                    console.error('Please enter a valid email!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'managerOffice',
+            name: 'officeNumber',
             message: "What is the manager's office number?",
-        },
-        {
-            type: 'input',
-            name: 'engineerName',
-            message: "What is the engineer's name?",
-        },
-        {
-            type: 'input',
-            name: 'engineerID',
-            message: "What is the engineer's ID?",
-        },
-        {
-            type: 'input',
-            name: 'engineerEmail',
-            message: "What is the engineer's email address?",
-        },
-        {
-            type: 'input',
-            name: 'engineerGit',
-            message: "What is the engineer's GitHub user name?",
-        },
-        {
-            type: 'input',
-            name: 'internName',
-            message: "What is the intern's name?",
-        },
-        {
-            type: 'input',
-            name: 'internID',
-            message: "What is the intern's ID?",
-        },
-        {
-            type: 'input',
-            name: 'internEmail',
-            message: "What is the intern's email address?",
-        },
-        {
-            type: 'input',
-            name: 'internSchool',
-            message: 'What school does the intern attend?'
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.error('Please enter a valid office number!');
+                    return false;
+                }
+            }
         }
-    ]);
-};
+    ])
+        .then(mangerData => {
 
-const generateMainHTML = (answers) =>
-    `<!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Team Profile</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    </head>
-    
-    <body>
-        <header>
-            <div class="h-100 p-5 border rounded-3" style="background-color: royalblue;">
-                <h2 class="text-white" style="text-align: center;">My Team</h2>
-                <p></p>
-            </div>
-        </header>
-        <main>
-            <div class="container">
-                <div class="row d-flex justify-content-center" style="margin: 20px;">
-                    <div class="col">
-                        <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">${answers.managerName}
-                                </h5>
-                                <p class="card-text">Manager</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${answers.managerID}</li>
-                                <li class="list-group-item">Email:<a href="mailto:${answers.managerEmail}"
-                                        target="_blank">${answers.managerEmail}</a></li>
-                                </li>
-                                <li class="list-group-item">Office number: ${answers.managerOffice}</li>
-                            </ul>
-                        </div>
-                    </div>`
-const generateEngineerHTML = (answers) =>
-    `<div class="col">
-                        <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">${answers.engineerName}</h5>
-                                <p class="card-text">Engineer</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${answers.engineerID}</li>
-                                <li class="list-group-item">Email: <a href="mailto:${answers.engineerEmail}"
-                                        target="_blank">${answers.engineerEmail}</a></li>
-                                </li>
-                                <li class="list-group-item">GitHub: <a href="https://github.com/${answers.engineerGit}"
-                                        target="_blank">${answers.engineerGit}</a></li>
-                            </ul>
-                        </div>
-                    </div>`
-const generateInternHTML = (answer) =>
-    `<div class="col">
-                        <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">${answer.internName}</h5>
-                                <p class="card-text">Intern</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${answer.internID}</li>
-                                <li class="list-group-item">Email: <a href="mailto:${answer.internEmail}"
-                                        target="_blank">${answer.internEmail}</a></li>
-                                <li class="list-group-item">School: ${answer.internSchool}</li>
-                            </ul>
-                        </div>
-                    </div>`
-const generateFinalHTML = () =>
-    `</div>
-            </div>
-            </div>
-            </div>
-        </main>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    
-    </html>`
+            const { name, id, email, officeNumber } = mangerData;
+            const manager = new Manager(name, id, email, officeNumber);
 
-const init = () => {
-    promptUser()
-        .then((answers) => writeFileAsync('./dist/index.html', generateMainHTML(answers)))
-        .then((answer) => appendFileAsync('./dist/index.html', generateEngineerHTML(answer)))
-        .then((answers) => appendFileAsync('./dist/index.html', generateInternHTML(answers)))
-        .then(() => appendFileAsync('./dist/index', generateFinalHTML()))
-        .then(() => console.log('Successfully created team list!'))
-        .catch((err) => console.error(err));
+            teamArr.push(manager);
+            console.log(manager);
+        })
 }
 
-init();
+const employeePrompt = () => {
+    console.log(`
+    ----------------------------------------------------------------
+    Adding more employees to the team!
+    ----------------------------------------------------------------
+    `)
+
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'role',
+            message: "Please choose your employee's role",
+            choices: ['Engineer', 'Intern']
+        },
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the employee's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.error('Please enter an employee name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the employee's ID?",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.error('Please enter a valid ID!');
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the employee's email address?",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+                if (valid) {
+                    return true;
+                } else {
+                    console.error('Please enter a valid email!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'gitHub',
+            message: "What is the engineer's GitHub user name?",
+            when: (input) => input.role === 'Engineer',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.error('Please enter a GitHub user name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What school does the intern attend?',
+            when: (input) => input.role === 'Intern',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.error('Please enter a valid school name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmNewEmployee',
+            message: 'Would you like to create a new employee?',
+            default: false
+        }
+    ])
+
+        .then(employeeInput => {
+
+            let { name, id, email, role, gitHub, school, confirmNewEmployee } = employeeInput;
+            let employee;
+
+            if (role === 'Engineer') {
+                employee = new Engineer(name, id, email, gitHub);
+            }
+
+            console.log(employee);
+
+            if (role === 'Intern') {
+                employee = new Intern(name, id, email, school);
+
+                console.log(employee);
+            }
+
+            teamArr.push(employee);
+
+            if (confirmNewEmployee) {
+                return employeePrompt(teamArr);
+            } else {
+                return teamArr;
+            }
+        })
+};
+
+
+const writeFile = inputs => {
+    fs.writeFile('./dist/index.html', inputs, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log('Success! HTML generated!')
+        }
+    })
+};
+
+managerPrompt()
+    .then(employeePrompt)
+    .then(teamArr => {
+        return htmlGenerator(teamArr);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .catch(err => {
+        console.log(err);
+    });

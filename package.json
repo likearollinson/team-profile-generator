@@ -1,0 +1,27 @@
+{
+  "name": "unc-hw-10-team-profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/likearollinson/unc-hw-10-team-profile-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/likearollinson/unc-hw-10-team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/likearollinson/unc-hw-10-team-profile-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.2",
+    "jest": "^27.0.6"
+  }
+}

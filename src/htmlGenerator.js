@@ -1,6 +1,5 @@
-const generateMainHTML = function (teamCards) {
-    return `
-    <!DOCTYPE html>
+const generateMainHTML = (teamCards) =>
+    `<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -31,13 +30,10 @@ const generateMainHTML = function (teamCards) {
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
         
-        </html>
-        `
-}
+        </html>`
 
-const generateMangagerCard = function (manager) {
-    return `
-    <div class="col">
+const generateMangagerCard = (manager) =>
+    `<div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${manager.name}
@@ -52,12 +48,10 @@ const generateMangagerCard = function (manager) {
                                 <li class="list-group-item">Office number: ${manager.officeNumber}</li>
                             </ul>
                         </div>
-                    </div>
-                    `
-}
-const generateEngineerCard = function (engineer) {
-    return `
-    <div class="col">
+                    </div>`
+
+const generateEngineerCard = (engineer) =>
+    `<div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${engineer.name}</h5>
@@ -72,13 +66,9 @@ const generateEngineerCard = function (engineer) {
                                         target="_blank">${engineer.gitHub}</a></li>
                             </ul>
                         </div>
-                    </div>
-                    `
-}
-
-const generateInternCard = function (intern) {
-    return `
-    <div class="col">
+                    </div>`
+const generateInternCard = (intern) =>
+    `<div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${intern.name}</h5>
@@ -91,9 +81,8 @@ const generateInternCard = function (intern) {
                                 <li class="list-group-item">School: ${intern.school}</li>
                             </ul>
                         </div>
-                    </div>
-                    `
-}
+                    </div>`
+
 generateFullHTML = (inputs) => {
     domArr = [];
 

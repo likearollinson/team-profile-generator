@@ -1,5 +1,6 @@
 const generateMainHTML = (teamCards) =>
-    `<!DOCTYPE html>
+    `
+    <!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -30,10 +31,12 @@ const generateMainHTML = (teamCards) =>
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
         
-        </html>`
+        </html>
+        `
 
 const generateMangagerCard = (manager) =>
-    `<div class="col">
+    `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${manager.name}
@@ -48,17 +51,19 @@ const generateMangagerCard = (manager) =>
                                 <li class="list-group-item">Office number: ${manager.officeNumber}</li>
                             </ul>
                         </div>
-                    </div>`
+                    </div>
+                    `
 
 const generateEngineerCard = (engineer) =>
-    `<div class="col">
+    `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${engineer.name}</h5>
                                 <p class="card-text">Engineer</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: ${engineer.engineerID}</li>
+                                <li class="list-group-item">ID: ${engineer.id}</li>
                                 <li class="list-group-item">Email: <a href="mailto:${engineer.email}"
                                         target="_blank">${engineer.email}</a></li>
                                 </li>
@@ -66,9 +71,11 @@ const generateEngineerCard = (engineer) =>
                                         target="_blank">${engineer.gitHub}</a></li>
                             </ul>
                         </div>
-                    </div>`
+                    </div>
+                    `
 const generateInternCard = (intern) =>
-    `<div class="col">
+    `
+    <div class="col">
                         <div class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">${intern.name}</h5>
@@ -81,33 +88,36 @@ const generateInternCard = (intern) =>
                                 <li class="list-group-item">School: ${intern.school}</li>
                             </ul>
                         </div>
-                    </div>`
+                    </div>
+                    `
 
-generateFullHTML = (inputs) => {
-    domArr = [];
+generateFullHTML = (data) => {
+    cardArr = [];
 
-    for (i = 0; i < inputs.length; i++) {
-        const employee = inputs[i];
+    for (i = 0; i < data.length; i++) {
+        const employee = data[i];
         const role = employee.getRole();
 
-
+        console.log(role)
         if (role === 'Manager') {
             const managerCard = generateMangagerCard(employee);
-            domArr.push(managerCard);
+            cardArr.push(managerCard);
         }
         if (role === 'Engineer') {
             const engineerCard = generateEngineerCard(employee);
-            domArr.push(engineerCard);
+            cardArr.push(engineerCard);
         }
         if (role === 'Intern') {
             const internCard = generateInternCard(employee);
-            domArr.push(internCard);
+            cardArr.push(internCard);
         }
     }
-    const teamCards = domArr.join('');
+    const teamCards = cardArr.join('');
 
     const generateTeam = generateMainHTML(teamCards);
-    return generateTeam
+    return generateTeam;
 }
+
+
 
 module.exports = generateFullHTML;

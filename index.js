@@ -23,7 +23,7 @@ const managerPrompt = () => {
                     console.error('Please enter a manager name!');
                     return false;
                 }
-            }
+            }, default: 'Brad'
         },
         {
             type: 'input',
@@ -36,7 +36,7 @@ const managerPrompt = () => {
                 } else {
                     return true;
                 }
-            }
+            }, default: 1
         },
         {
             type: 'input',
@@ -50,7 +50,7 @@ const managerPrompt = () => {
                     console.error('Please enter a valid email!');
                     return false;
                 }
-            }
+            }, default: 'brad@email.com'
         },
         {
             type: 'input',
@@ -63,7 +63,7 @@ const managerPrompt = () => {
                     console.error('Please enter a valid office number!');
                     return false;
                 }
-            }
+            }, default: 42
         }
     ])
         .then(mangerData => {
@@ -101,7 +101,7 @@ const employeePrompt = () => {
                     console.error('Please enter an employee name!');
                     return false;
                 }
-            }
+            }, default: 'Frank'
         },
         {
             type: 'input',
@@ -114,7 +114,7 @@ const employeePrompt = () => {
                 } else {
                     return true;
                 }
-            }
+            }, default: 2
         },
         {
             type: 'input',
@@ -128,7 +128,7 @@ const employeePrompt = () => {
                     console.error('Please enter a valid email!');
                     return false;
                 }
-            }
+            }, default: 'frank@email.com'
         },
         {
             type: 'input',
@@ -142,7 +142,7 @@ const employeePrompt = () => {
                     console.error('Please enter a GitHub user name!');
                     return false;
                 }
-            }
+            }, default: 'frankthetank'
         },
         {
             type: 'input',
@@ -156,7 +156,7 @@ const employeePrompt = () => {
                     console.error('Please enter a valid school name!');
                     return false;
                 }
-            }
+            }, default: 'UNC'
         },
         {
             type: 'confirm',
@@ -194,8 +194,8 @@ const employeePrompt = () => {
 };
 
 
-const writeFile = inputs => {
-    fs.writeFile('./dist/index.html', inputs, err => {
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
         if (err) {
             console.log(err);
             return;

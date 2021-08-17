@@ -1,8 +1,6 @@
-const { it } = require('@jest/globals');
-const { describe } = require('yargs');
 const Employee = require('../lib/Employee');
 
-describe('Employee'), () => {
+describe('Employee', () => {
     describe('Initialization', () => {
         it('should create an object with employee information', () => {
             const employee = new Employee('Brad', 1, 'brad@email.com');
@@ -44,4 +42,4 @@ describe('Employee'), () => {
             expect(employee.getRole()).toEqual('Employee');
         });
     });
-}
+})

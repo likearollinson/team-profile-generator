@@ -1,8 +1,6 @@
-const { it } = require('@jest/globals');
-const { describe } = require('yargs');
 const Intern = require('../lib/Intern');
 
-describe('Intern'), () => {
+describe('Intern', () => {
     describe('Initialization', () => {
         it('should create an object with intern information', () => {
             const intern = new Intern('Brad', 1, 'brad@email.com', 'UNC');
@@ -38,10 +36,10 @@ describe('Intern'), () => {
     });
 
     describe('Git', () => {
-        it('should have an intern GitHub matching the input', () => {
+        it('should have an intern school matching the input', () => {
             const intern = new Intern('Brad', 1, 'brad@email.com', 'UNC');
 
-            expect(intern.gitHub).toEqual('UNC');
+            expect(intern.school).toEqual('UNC');
         });
     });
 
@@ -52,4 +50,4 @@ describe('Intern'), () => {
             expect(intern.getRole()).toEqual('Intern');
         });
     });
-}
+})

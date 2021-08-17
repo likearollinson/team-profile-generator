@@ -1,8 +1,6 @@
-const { it } = require('@jest/globals');
-const { describe } = require('yargs');
 const Manager = require('../lib/Manager');
 
-describe('Manager'), () => {
+describe('Manager', () => {
     describe('Initialization', () => {
         it('should create an object with manager information', () => {
             const manager = new Manager('Brad', 1, 'brad@email.com', 42);
@@ -38,10 +36,10 @@ describe('Manager'), () => {
     });
 
     describe('Git', () => {
-        it('should have an manager GitHub matching the input', () => {
+        it('should have an manager office number matching the input', () => {
             const manager = new Manager('Brad', 1, 'brad@email.com', 42);
 
-            expect(manager.gitHub).toEqual(42);
+            expect(manager.officeNumber).toEqual(42);
         });
     });
 
@@ -52,4 +50,4 @@ describe('Manager'), () => {
             expect(manager.getRole()).toEqual('Manager');
         });
     });
-}
+})

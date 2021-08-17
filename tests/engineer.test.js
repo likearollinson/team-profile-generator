@@ -1,8 +1,6 @@
-const { it } = require('@jest/globals');
-const { describe } = require('yargs');
 const Engineer = require('../lib/Engineer');
 
-describe('Engineer'), () => {
+describe('Engineer', () => {
     describe('Initialization', () => {
         it('should create an object with engineer information', () => {
             const engineer = new Engineer('Brad', 1, 'brad@email.com', 'gitBrad');
@@ -52,4 +50,4 @@ describe('Engineer'), () => {
             expect(engineer.getRole()).toEqual('Engineer');
         });
     });
-}
+})
